@@ -91,6 +91,10 @@ void ui_draw(void)
 
 void update_score(void)
 {
+    if (score_text.texture != NULL) {
+        SDL_DestroyTexture(score_text.texture);
+    }
+
     char text[12];
     sprintf(text, "%d", score);
     score_text = create_textf(text, (SDL_Color) { 255, 255, 255, 255 },
@@ -147,6 +151,10 @@ void ui_destroy(void)
 
     if (gameover_text.texture != NULL) {
         SDL_DestroyTexture(gameover_text.texture);
+    }
+
+    if (score_text.texture != NULL) {
+        SDL_DestroyTexture(score_text.texture);
     }
 
     TTF_CloseFont(ui_font);
