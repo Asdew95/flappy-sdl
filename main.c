@@ -17,10 +17,10 @@ SDL_Renderer *renderer = NULL;
 uint64_t lose_time = 0;
 int score = 0;
 
-void game_init(void);
+static void game_init(void);
 
-void tick(double delta);
-void draw(void);
+static void tick(double delta);
+static void draw(void);
 
 int main()
 {
@@ -118,7 +118,7 @@ SDL_Texture *load_texture(const char *path)
     return tex;
 }
 
-void game_init(void)
+static void game_init(void)
 {
     srand(time(NULL));
     bird_init();
@@ -126,12 +126,12 @@ void game_init(void)
     ui_init();
 }
 
-void tick(double delta)
+static void tick(double delta)
 {
     ui_tick(delta);
 }
 
-void draw(void)
+static void draw(void)
 {
     ui_draw();
 }
