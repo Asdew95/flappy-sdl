@@ -24,20 +24,20 @@ void draw(void);
 
 int main()
 {
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		fprintf(stderr, "SDL_Init SDL_INIT_VIDEO failed! SDL error: %s\n",
-				SDL_GetError());
-		die(1);
-	}
+    if (SDL_Init(SDL_INIT_VIDEO) < 0) {
+        fprintf(stderr, "SDL_Init SDL_INIT_VIDEO failed! SDL error: %s\n",
+                SDL_GetError());
+        die(1);
+    }
 
-	window = SDL_CreateWindow("Flappy SDL", SDL_WINDOWPOS_UNDEFINED,
-							  SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
-							  SCREEN_HEIGHT, 0);
-	if (window == NULL) {
-		fprintf(stderr, "Creating window failed! SDL error: %s\n",
-				SDL_GetError());
-		die(1);
-	}
+    window = SDL_CreateWindow("Flappy SDL", SDL_WINDOWPOS_UNDEFINED,
+                              SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
+                              SCREEN_HEIGHT, 0);
+    if (window == NULL) {
+        fprintf(stderr, "Creating window failed! SDL error: %s\n",
+                SDL_GetError());
+        die(1);
+    }
 
     int img_flags = IMG_INIT_PNG;
     if (!(IMG_Init(img_flags) & img_flags)) {
@@ -60,26 +60,26 @@ int main()
 
     SDL_SetRenderDrawColor(renderer, 0xfb, 0x71, 0xff, 0xff);
 
-	game_init();
+    game_init();
 
     uint64_t now = SDL_GetPerformanceCounter();
     uint64_t last;
 
-	SDL_Event e;
-	while (1) {
-		while (SDL_PollEvent(&e) != 0) {
-			if (e.type == SDL_QUIT) {
-				die(0);
-			} else if (e.type == SDL_KEYDOWN) {
-				if (e.key.keysym.sym == SDLK_q) {
-					die(0);
+    SDL_Event e;
+    while (1) {
+        while (SDL_PollEvent(&e) != 0) {
+            if (e.type == SDL_QUIT) {
+                die(0);
+            } else if (e.type == SDL_KEYDOWN) {
+                if (e.key.keysym.sym == SDLK_q) {
+                    die(0);
                 }
 
                 if (e.key.repeat == 0) {
                     ui_keydown(e.key.keysym.sym);
                 }
             }
-		}
+        }
 
         last = now;
         now = SDL_GetPerformanceCounter();
@@ -93,9 +93,9 @@ int main()
         draw();
 
         SDL_RenderPresent(renderer);
-	}
+    }
 
-	die(0);
+    die(0);
 }
 
 SDL_Texture *load_texture(const char *path)
@@ -153,12 +153,12 @@ void die(int status)
         SDL_DestroyRenderer(renderer);
     }
 
-	if (window != NULL) {
-		SDL_DestroyWindow(window);
-	}
+    if (window != NULL) {
+        SDL_DestroyWindow(window);
+    }
 
     IMG_Quit();
-	SDL_Quit();
+    SDL_Quit();
 
-	exit(status);
+    exit(status);
 }
